@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="theme-color" content="#071936">
+  <meta name="description" content="Отправляйся с Риком в экспедицию: открывай химические элементы, собирай молекулы и находи химию вокруг себя.">
+  <title>Элемент — экспедиция в мир химии</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%230d3270'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-size='42' font-family='sans-serif' fill='%2371dcff'%3Ee%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css?v=5fa1688d15">
+  <link rel="stylesheet" href="scenes.css?v=6a7b92796d">
+  <script src="elements.js?v=238d797a02" defer></script>
+  <script src="engine.js?v=59110e2149" defer></script>
+  <script src="app.js?v=07e0f5c5d8" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#learn" aria-label="Элемент, на карту"><span class="brand-orbit" aria-hidden="true">⚛</span><span>Элемент<small>Химия начинается с открытия</small></span></a>
+      <nav id="main-nav" aria-label="Главное меню">
+        <button data-view="learn"><span data-icon="world"></span><span>Мир</span></button>
+        <button data-view="practice"><span data-icon="flask"></span><span>Практика</span></button>
+        <button data-view="collection"><span data-icon="grid"></span><span>Таблица 118</span></button>
+        <button data-view="treasure"><span data-icon="gift"></span><span>Сокровища</span></button>
+        <button data-view="progress"><span data-icon="trophy"></span><span>Прогресс</span></button>
+      </nav>
+      <div class="header-stats"><span id="crystal-balance" class="crystal-counter" aria-label="Кристаллы">◆ 0</span><span class="xp-counter"><span data-icon="spark"></span><b id="header-xp">0</b> XP</span><button class="icon-button" id="voice-toggle" aria-label="Выключить озвучивание" aria-pressed="true"></button><button class="icon-button" id="sound-toggle" aria-label="Включить звуки" aria-pressed="false"></button><button class="icon-button" id="help-button" aria-label="Как играть"><span data-icon="help"></span></button></div>
+    </header>
+    <main id="page-content"></main>
+    <footer class="page-footer"><span>Маленькие открытия. Большой мир. <button class="footer-help" data-action="help">Правила и настройки</button></span><span>118 элементов · <a href="https://periodic-table.rsc.org/" target="_blank" rel="noopener noreferrer">RSC</a> · <a href="https://iupac.org/what-we-do/periodic-table-of-elements/" target="_blank" rel="noopener noreferrer">IUPAC</a> · прототип</span></footer>
+  </div>
+  <dialog id="game-dialog" aria-labelledby="game-title"><div id="game-content"></div></dialog>
+  <dialog id="reward-dialog" aria-labelledby="reward-title"><div id="reward-content"></div></dialog>
+  <dialog id="help-dialog" aria-labelledby="help-title">
+    <div class="help-content"><button class="close-button" id="close-help" aria-label="Закрыть справку">×</button><div class="eyebrow">Добро пожаловать в экспедицию</div><h2 id="help-title">Три шага к открытию</h2><div class="quick-rules"><span><b>1</b> Изучи элементы</span><span><b>2</b> Ответь на 8 вопросов</span><span><b>3</b> Открой сундук</span></div><details><summary>Все правила и подсказки</summary><p>В каждой экспедиции пять элементов: сначала познакомься с ними и узнай, где они встречаются, затем ответь на восемь вопросов. До двух ошибок вернутся после других заданий.</p><ol><li><b>Исследуй мир.</b> Можно выбрать любой остров. Звёзды показывают точность первых ответов: 50%, 75% и 95%.</li><li><b>Играй по-разному.</b> Соединяй пары, собирай состав молекул, находи элементы в таблице, слушай и вводи символы.</li><li><b>Возвращайся позже.</b> Три ступени коллекции: первое узнавание, разные типы заданий, успешное повторение в другой день.</li></ol><p>Ошибки не отнимают жизни. Подсказка помогает, но ответ с ней не увеличивает уровень запоминания. За одну и ту же пару «элемент + тип задания» опыт начисляется один раз в день; за исправление ошибки — до 5 XP.</p></details><details class="glossary"><summary>Мини-словарь: атом, элемент, молекула, ион</summary><dl><dt>Атом</dt><dd>Очень маленькая частица с ядром и электронами.</dd><dt>Элемент</dt><dd>Вид атомов с одинаковым числом протонов в ядре. Например, все атомы кислорода относятся к элементу O.</dd><dt>Молекула</dt><dd>Связанные между собой атомы. В H₂O два атома H и один атом O.</dd><dt>Простое вещество и соединение</dt><dd>O₂ состоит из атомов одного элемента. H₂O — соединение: в нём атомы двух разных элементов.</dd><dt>Ион</dt><dd>Атом или группа атомов с электрическим зарядом. В соли натрий находится в виде ионов Na⁺.</dd><dt>Индекс</dt><dd>Маленькое число после символа показывает число атомов. Если числа нет, атом один.</dd></dl></details><label class="motion-option"><input type="checkbox" id="motion-toggle">Меньше анимации</label><p class="note">Названия озвучивает русский голос устройства. Микрофон не используется. Прогресс сохраняется в этом браузере. Сундук острова даёт экспонат и кристаллы за первую звезду. Кристаллы меняют оформление рамок; деньги не используются. Изображения мира — фантазия. Модели показывают состав, а не реальную геометрию молекул.</p><button class="primary" id="help-start">Начать открытия</button></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <noscript><p>Для игры нужно включить JavaScript.</p></noscript>
+</body>
+</html>
